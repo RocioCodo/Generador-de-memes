@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anek+Odia&family=Anek+Tamil:wght@200&family=Cookie&family=Dancing+Script:wght@600&family=Grape+Nuts&family=Nunito:wght@200&family=Open+Sans&family=Poppins:wght@200&family=Roboto:wght@100&family=Satisfy&family=Titillium+Web:ital,wght@0,200;0,400;1,200;1,400&display=swap" rel="stylesheet">
     <title>Editor de memes</title>
 </head>
-<body>
+<body class="modo-oscuro">
     <!-- ******************************************
                          Header
          ******************************************     -->
@@ -20,9 +20,13 @@
             <h1 class="titulo">Generador de Memes</h1>
         </div>
         <div class="botones">
-            <button class="boton-titulo"><a href=""></a><i class="fa-solid fa-image"></i>Imagen</button>
-            <button class="boton-titulo"><a href=""></a><i class="fa-solid fa-font"></i>Texto</button>
-            <button class="boton-titulo"><a href=""></a><i class="fa-solid fa-lightbulb"></i>Modo Oscuro</button>
+            <button id="btnImagen" class="boton-titulo"><a href=""></a><i class="fa-solid fa-image"></i>Imagen</button>
+            <button id="btnTexto" class="boton-titulo"><a href=""></a><i class="fa-solid fa-font"></i>Texto</button>
+            <div class="boton-titulo">
+                <input type="checkbox" id="btnModoOscuro">
+                <label for="btnModoOscuro"><i class="fa-solid fa-lightbulb"></i>Modo Oscuro</label>
+            </div>
+
 
         </div>
     </header>
@@ -31,14 +35,13 @@
          ******************************************     -->
     <section>
         <div class="section1">
-        <div class="pie-foto">
-            <p>TOP TEXT</p>
+        <div class="pie-foto" id="textoSuperior">
+            <p id="topText">TOP TEXT</p>
         </div>
-        <div class="imagen">
-            <img src="" alt="">
+        <div class="imagen" id="imagen" src="" alt="" aria-label="Imagen del meme">
         </div>
-        <div class="pie-foto">
-            <p>BOTTOM TEXT</p>
+        <div class="pie-foto" id="textoInferior">
+            <p id="bottomText">BOTTOM TEXT</p>
         </div>
     </div>
 
@@ -55,13 +58,16 @@
       <!-- ******************************************
                         Aside1
          ******************************************     -->
-    <div class="aside">
+    <div id="aside" class="aside">
+        <button class="cerrar-panel" id="cerrar-panel-btn" aria-label="Cerrar panel">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
          <div class="imagen-rotulo">
              <h2>IMAGEN</h2>
          </div>
          <div class="URL">
              <p class="url-p">URL</p>
-             <input type="text" class="url-input" id="url-img-input" aria-label="URL de imagen">
+             <input type="text" class="url-input" id="urlImgInput" aria-label="URL de imagen">
          </div>
          <div class="fondo">
              <p>FONDO</p>
@@ -88,45 +94,45 @@
             <p>FILTROS</p>
             <div class="brightness">
                 <label for="brightness-slider">BRILLO</label>
-                <input type="range" id="brightness-slider" min="0" max="1" value="1" step="0.1">
+                <input type="range" id="brightness-slider" class="range" min="0" max="1" value="1" step="0.1">
             </div>
             <div class="opacity">
                 <label for="opacity-slider">OPACIDAD</label>
-                <input type="range" id="opacity-slider" min="0" max="1" value="1" step="0.1">
+                <input type="range" id="opacity-slider" class="range" min="0" max="1" value="1" step="0.1">
             </div>
             <div class="contrast">
                 <label for="contrast-slider">CONTRASTE</label>
-                <input type="range" id="contrast-slider" min="100" max="1000" value="100">
+                <input type="range" id="contrast-slider" class="range" min="100" max="1000" value="100">
             </div>
             <div class="blur">
                 <label for="blur-slider">DESENFOQUE</label>
-                <input type="range" id="blur-slider" min="0" max="10" value="0" step="0.1">
+                <input type="range" id="blur-slider" class="range" min="0" max="10" value="0" step="0.1">
             </div>
             <div class="grayscale">
                 <label for="grayscale-slider">ESCALA DE GRISES</label>
-                <input type="range" id="grayscale-slider" min="0" max="100" value="0">
+                <input type="range" id="grayscale-slider" class="range" min="0" max="100" value="0">
             </div>
             <div class="sepia">
                 <label for="sepia-slider">SEPIA</label>
-                <input type="range" id="sepia-slider" min="0" max="100" value="0">
+                <input type="range" id="sepia-slider" class="range" min="0" max="100" value="0">
             </div>
             <div class="hue">
                 <label for="hue-slider">HUE</label>
-                <input type="range" id="hue-slider" min="0" max="360" value="0">
+                <input type="range" id="hue-slider" class="range" min="0" max="360" value="0">
             </div>
             <div class="saturation">
                 <label for="saturation-slider">SATURADO</label>
-                <input type="range" id="saturation-slider" min="100" max="1000" value="100" step="10">
+                <input type="range" id="saturation-slider" class="range" min="100" max="1000" value="100" step="10">
             </div>
             <div class="invert">
                 <label for="invert-slider">NEGATIVO</label>
-                <input type="range" id="invert-slider" min="0" max="1" value="0" step="0.1">
+                <input type="range" id="invert-slider" class="range" min="0" max="1" value="0" step="0.1">
             </div>
     
         </div>
 
         <div class="btn-filtro">
-            <button class="reestablecer-filtros">Reestablecer filtros</button>
+            <button class="reestablecer-filtros" id="reestablecer-filtros">Reestablecer filtros</button>
         </div>
 
      </div>
@@ -135,7 +141,10 @@
                         Aside2
          ******************************************     -->
 
-    <div class="aside2">
+    <div id="aside2" class="aside2">
+        <button class="cerrar-panel" id="cerrar-panel-btn2" aria-label="Cerrar panel">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
         <div class="texto">
             <h2>TEXTO</h2>
         </div>
@@ -153,7 +162,7 @@
             <p class="inferior-p">INFERIOR</p>
             <textarea aria-label="Texto inferior" class="inferior-text" id="inferior-text">BOTTOM TEXT</textarea>
             <div class="inferior-checkbox">
-                <input type="checkbox" id="checkbox-text">
+                <input type="checkbox" id="checkbox-text-inf">
                 <label for="checkbox-text">Sin texto inferior</label>
             </div>
         </div>
@@ -242,6 +251,6 @@
 
 
     </div>
-    
+    <script src="app.js"></script>
 </body>
 </html>
