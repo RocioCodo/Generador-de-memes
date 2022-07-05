@@ -121,6 +121,7 @@ section {
 
 .pie-foto {
   width: 100%;
+  height: auto;
   font-family: Impact;
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
@@ -131,6 +132,7 @@ section {
   align-items: center;
   padding: 15px 50px;
 }
+
 
 /******************************************
                   Footer

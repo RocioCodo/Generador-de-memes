@@ -91,104 +91,44 @@ inputTonalidad.addEventListener("change", (e) => {
 
 /***********FILTROS***********/
 
-/***brillo***/
+ const brightnessSlider = document.getElementById("brightness-slider");
+ const opacitySlider = document.getElementById("opacity-slider");
+ const contrastSlider = document.getElementById("contrast-slider");
+ const blurSlider = document.getElementById("blur-slider");
+ const grayscaleSlider = document.getElementById("grayscale-slider");
+ const sepiaSlider = document.getElementById("sepia-slider");
+ const hueSlider = document.getElementById("hue-slider");
+ const saturationSlider = document.getElementById("saturation-slider")
+ const invertSlider = document.getElementById("invert-slider");
 
-const brightnessSlider = document.getElementById("brightness-slider");
 
-brightnessSlider.addEventListener("change", (e) => {
-  const brillo = e.target.value;
-  if (brillo.length !== 0) {
-    imagen.style.filter = `brightness(${brillo})`;
-  }
-});
+const filtros = () => {
+  const brightness = brightnessSlider.value
+  const opacity = opacitySlider.value
+  const blur = blurSlider.value
+  const contrast = contrastSlider.value
+  const grayscale = grayscaleSlider.value
+  const hue = hueSlider.value
+  const sepia = sepiaSlider.value
+  const saturate = saturationSlider.value
+  const invert = invertSlider.value
 
-/***opacidad***/
+  imagen.style.filter = `brightness(${brightness}) opacity(${opacity}) blur(${blur}px) contrast(${contrast}%) grayscale(${grayscale}%)  hue-rotate(${hue}deg) sepia(${sepia}%) saturate(${saturate}%) invert(${invert})`
+}
 
-const opacitySlider = document.getElementById("opacity-slider");
+const inicializarFiltros = () => {
+  brightnessSlider.addEventListener('change', filtros)
+  opacitySlider.addEventListener('change', filtros)
+  blurSlider.addEventListener('change', filtros)
+  contrastSlider.addEventListener('change', filtros)
+  grayscaleSlider.addEventListener('change', filtros)
+  hueSlider.addEventListener('change', filtros)
+  sepiaSlider.addEventListener('change', filtros)
+  saturationSlider.addEventListener('change', filtros)
+  invertSlider.addEventListener('change', filtros)
+}
 
-opacitySlider.addEventListener("change", (e) => {
-  const opacidad = e.target.value;
-  if (opacidad.length !== 0) {
-    imagen.style.filter = `opacity(${opacidad})`;
-  }
-});
-
-/***contraste***/
-
-const contrastSlider = document.getElementById("contrast-slider");
-
-contrastSlider.addEventListener("change", (e) => {
-  const contraste = e.target.value;
-  if (contraste.length !== 0) {
-    imagen.style.filter = `contrast(${contraste}%)`;
-  }
-});
-
-/***desenfoque***/
-
-const blurSlider = document.getElementById("blur-slider");
-
-blurSlider.addEventListener("change", (e) => {
-  const desenfoque = e.target.value;
-  if (desenfoque.length !== 0) {
-    imagen.style.filter = `blur(${desenfoque}px)`;
-  }
-});
-
-/***escala de grises***/
-
-const grayscaleSlider = document.getElementById("grayscale-slider");
-
-grayscaleSlider.addEventListener("change", (e) => {
-  const escalaDeGrises = e.target.value;
-  if (escalaDeGrises.length !== 0) {
-    imagen.style.filter = `grayscale(${escalaDeGrises}%)`;
-  }
-});
-
-/***sepia***/
-
-const sepiaSlider = document.getElementById("sepia-slider");
-
-sepiaSlider.addEventListener("change", (e) => {
-  const sepia = e.target.value;
-  if (sepia.length !== 0) {
-    imagen.style.filter = `sepia(${sepia}%)`;
-  }
-});
-
-/***hue***/
-
-const hueSlider = document.getElementById("hue-slider");
-
-hueSlider.addEventListener("change", (e) => {
-  const hue = e.target.value;
-  if (hue.length !== 0) {
-    imagen.style.filter = `hue-rotate(${hue}deg)`;
-  }
-});
-
-/***saturado***/
-
-const saturationSlider = document.getElementById("saturation-slider");
-
-saturationSlider.addEventListener("change", (e) => {
-  const saturado = e.target.value;
-  if (saturado.length !== 0) {
-    imagen.style.filter = `saturate(${saturado}%)`;
-  }
-});
-
-/***negativo***/
-
-const invertSlider = document.getElementById("invert-slider");
-
-invertSlider.addEventListener("change", (e) => {
-  const negativo = e.target.value;
-  if (negativo.length !== 0) {
-    imagen.style.filter = `invert(${negativo})`;
-  }
-});
+ inicializarFiltros()
 
 /***reestablecer filtros***/
 
@@ -208,6 +148,7 @@ reestablecerFiltros.addEventListener("click", (e) => {
   imagen.style.backgroundColor = "transparent";
 });
 
+
 /******************************************
             Panel de texto
 ******************************************/
@@ -221,6 +162,8 @@ superiorText.addEventListener("input", (e) => {
   const textoSup = e.target.value;
   if (textoSup.length !== 0) {
     topText.innerHTML = textoSup;
+    textoSuperior.style.overflow="hidden";
+
   }
 });
 
@@ -244,6 +187,7 @@ inferiorText.addEventListener("input", (e) => {
   const textoInf = e.target.value;
   if (textoInf.length !== 0) {
     bottomText.innerHTML = textoInf;
+    textoInferior.style.overflow="hidden";
   }
 });
 
@@ -333,72 +277,41 @@ colorFondoInput.addEventListener("input", (e) => {
 
 const checkboxTransparente = document.getElementById("checkbox-transparente");
 
-checkboxTransparente.addEventListener("change", () => {
-  if (checkboxTransparente.checked) {
-    textoSuperior.style.backgroundColor = "transparent";
-    textoInferior.style.backgroundColor = "transparent";
-    textoSuperior.style.position = "absolute";
-    textoInferior.style.position = "absolute";
-    textoSuperior.style.top = "120px";
-    textoInferior.style.bottom = "70px";
-  } else {
-    textoSuperior.style.position = "static";
-    textoInferior.style.position = "static";
+const actualizarFondoTexto=()=>{
+      if(!checkboxTransparente.checked){
+      const colorFondoElegido = colorFondoInput.value;
+      textFondo.innerText = colorFondoElegido.toUpperCase();
+      textoSuperior.style.backgroundColor= 'pink';
+      textoInferior.style.backgroundColor= 'pink';
+      }
+       else{
+      textoSuperior.style.backgroundColor='transparent';
+      textoInferior.style.backgroundColor='transparent';
+       }
   }
-});
 
-// //  colorFondoInput.addEventListener('input', (e)=>{
-// //      let colorFondoElegido = e.target.value;
-// //      if(checkboxTransparente.checked){
-// //      textoSuperior.style.backgroundColor='transparent';
-// //      textoInferior.style.backgroundColor='transparent'
-// //           textoSuperior.style.position='absolute';
-// //      textoInferior.style.position='absolute';
-// //      }else{
-// //        textFondo.innerText = colorFondoElegido.toUpperCase();
-// //        textoSuperior.style.backgroundColor= colorFondoElegido;
-// //         textoInferior.style.backgroundColor= colorFondoElegido;
-// //        textoSuperior.style.position='static';
-// //       textoInferior.style.position='static';
-// //        }
-// //  })
+const actualizarPosicionTexto= ()=>{
+  if(checkboxTransparente.checked){
+    textoSuperior.style.position='absolute';
+    textoInferior.style.position='absolute';
+    textoSuperior.style.top='120px';
+    textoInferior.style.bottom='70px';
+      }else{
+    textoSuperior.style.position='static';
+    textoInferior.style.position='static';
+      }
+  }
 
-//  const actualizarFondoTexto=()=>{
-//      if(!checkboxTransparente.checked){
-//      const colorFondoElegido = colorFondoInput.value;
+const inicializarFondoTexto = () =>{
+ colorFondoInput.addEventListener('input', actualizarFondoTexto)
+ checkboxTransparente.addEventListener('change', () => {
+   actualizarFondoTexto()
+     actualizarPosicionTexto()
+  })
+ }
 
-//      textFondo.innerText = colorFondoElegido.toUpperCase();
-//       textoSuperior.style.backgroundColor= 'pink';
-//       textoInferior.style.backgroundColor= 'pink';
-//      }
-//       else{
-//             textoSuperior.style.backgroundColor='transparent';
-//           textoInferior.style.backgroundColor='transparent';
-//       }
-//     }
+ inicializarFondoTexto()
 
-//  const actualizarPosicionTexto= ()=>{
-//  if(checkboxTransparente.checked){
-//   textoSuperior.style.position='absolute';
-//    textoInferior.style.position='absolute';
-
-// //  textoSuperior.style.top='120px';
-// //  textoInferior.style.bottom='70px';
-//      }else{
-//  textoSuperior.style.position='static';
-//  textoInferior.style.position='static';
-//      }
-
-//  }
-
-//  const inicializarTexto = () =>{
-
-//  colorFondoInput.addEventListener('input', actualizarFondoTexto)
-//  checkboxTransparente.addEventListener('change', () => {
-//     actualizarFondoTexto()
-//     actualizarPosicionTexto()
-//  })
-// }
 
 /***Contorno***/
 
@@ -455,19 +368,18 @@ interlineadoIput.addEventListener("change", (e) => {
 
 /***Boton de descarga***/
 
-const botonDescarga = document.getElementById("boton-descarga");
-// const imagen = document.getElementById('imagen');
+const botonDescarga = document.getElementById('boton-descarga');
+const section1 = document.getElementById('section1');
 
 const descargarMeme = () => {
-  domtoimage.toBlob(imagen).then(function (blob) {
-    window.saveAs(blob, "mi-meme.png");
-  });
-};
+  domtoimage.toBlob(section1).then(function (blob) {
+    saveAs(blob, 'mi-meme.png');
+  })
+}
 
 const inicializar = () => {
-  botonDescarga.addEventListener("click", descargarMeme);
-};
-//   const inicializar = () =>{
-//   botonDescarga.addEventListener('click', (descargarMeme))  }
+  botonDescarga.addEventListener('click', descargarMeme);
+}
 
-window.onload = inicializar;
+inicializar()
+
