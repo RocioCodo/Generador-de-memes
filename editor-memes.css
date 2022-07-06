@@ -15,6 +15,9 @@ body.modo-oscuro {
   --color-boton-descarga-hover: #1c4b1e;
   --color-text: #ffffff;
   --font-primary: "Open Sans", sans-serif;
+  --color-boton-descarga: #8ab1df;
+  --color-boton-descarga-hover: #201b5e;
+  --color-boton-texto: black;
 }
 
 body.modo-claro {
@@ -28,6 +31,7 @@ body.modo-claro {
   --font-primary: "Open Sans", sans-serif;
   --color-boton-descarga: #201b5e;
   --color-boton-descarga-hover: #8ab1df;
+  --color-boton-texto: white;
 }
 
 body {
@@ -105,6 +109,7 @@ section {
   width: 100%;
   max-width: 500px;
   height: 70vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,7 +130,7 @@ section {
   font-family: Impact;
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
-  position: static;
+  text-align: center;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -133,6 +138,13 @@ section {
   padding: 15px 50px;
 }
 
+#topText{
+  top: 0;
+}
+
+#bottomText{
+  bottom: 0;
+}
 
 /******************************************
                   Footer
@@ -146,17 +158,19 @@ section {
 .boton-descarga {
   width: auto;
   background-color: var(--color-boton-descarga);
-  color: white;
+  color: var(--color-boton-texto);
   font-size: 12px;
   border-radius: 4px;
   border: var(--color-boton-descarga);
   padding: 15px 15px;
   margin: 0.3vh;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .boton-descarga:hover {
   background-color: var(--color-boton-descarga-hover);
+  color: var(--color-text);
 }
 
 /******************************************
@@ -338,23 +352,23 @@ select option {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 5px var(--color-text);
+
 }
 .reestablecer-filtros {
   width: 130px;
   height: 30px;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 1px;
+  border: 1px var(--color-text) solid;
   font-size: 13px;
-  font-weight: 600;
   color: var(--color-text);
   background-color: var(--color-background);
-  border: 2px var(--color-text);
 }
 
 .reestablecer-filtros:hover {
   background-color: var(--color-boton-hover);
-  border: 5px var(--color-text);
+  border: 1px var(--color-text) solid;
+  transition: 0.2s;
 }
 
 /******************************************

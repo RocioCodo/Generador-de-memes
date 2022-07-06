@@ -145,7 +145,7 @@ reestablecerFiltros.addEventListener("click", (e) => {
   saturationSlider.value = 100;
   invertSlider.value = 0;
   imagen.style.filter = "none";
-  imagen.style.backgroundColor = "transparent";
+  // imagen.style.backgroundColor = "transparent";
 });
 
 
@@ -259,59 +259,53 @@ colorTextoInput.addEventListener("input", (e) => {
   }
 });
 
-/***color fondo de fuente***/
+/***color fondo de fuente y fondo transparente***/
 
-const colorFondoInput = document.getElementById("color-fondo-input");
-const textFondo = document.getElementById("text-fondo");
-
-colorFondoInput.addEventListener("input", (e) => {
-  let colorFondoElegido = e.target.value;
-  if (colorFondoElegido.length !== 0) {
-    textFondo.innerText = colorFondoElegido.toUpperCase();
-    textoSuperior.style.backgroundColor = colorFondoElegido;
-    textoInferior.style.backgroundColor = colorFondoElegido;
-  }
-});
-
-/***fondo transparente***/
-
+ const colorFondoInput = document.getElementById("color-fondo-input");
+ const textFondo = document.getElementById("text-fondo");
 const checkboxTransparente = document.getElementById("checkbox-transparente");
 
-const actualizarFondoTexto=()=>{
-      if(!checkboxTransparente.checked){
+ const actualizarFondoTexto=()=>{
+    if(!checkboxTransparente.checked){
       const colorFondoElegido = colorFondoInput.value;
-      textFondo.innerText = colorFondoElegido.toUpperCase();
-      textoSuperior.style.backgroundColor= 'pink';
-      textoInferior.style.backgroundColor= 'pink';
-      }
-       else{
+
+       textFondo.innerText = colorFondoElegido.toUpperCase();
+       textoSuperior.style.backgroundColor = colorFondoElegido;
+       textoInferior.style.backgroundColor = colorFondoElegido;
+       }
+        else{
       textoSuperior.style.backgroundColor='transparent';
       textoInferior.style.backgroundColor='transparent';
-       }
-  }
+      textoSuperior.style.position='static';
+      textoInferior.style.position='static';
+
+        }
+   }
 
 const actualizarPosicionTexto= ()=>{
   if(checkboxTransparente.checked){
     textoSuperior.style.position='absolute';
     textoInferior.style.position='absolute';
-    textoSuperior.style.top='120px';
-    textoInferior.style.bottom='70px';
+     textoSuperior.style.top='10px';
+     textoInferior.style.bottom= '10px';
+
       }else{
     textoSuperior.style.position='static';
     textoInferior.style.position='static';
+
       }
   }
 
 const inicializarFondoTexto = () =>{
  colorFondoInput.addEventListener('input', actualizarFondoTexto)
  checkboxTransparente.addEventListener('change', () => {
-   actualizarFondoTexto()
-     actualizarPosicionTexto()
+  actualizarFondoTexto()   
+  actualizarPosicionTexto()
+     
   })
  }
 
  inicializarFondoTexto()
-
 
 /***Contorno***/
 
@@ -368,18 +362,18 @@ interlineadoIput.addEventListener("change", (e) => {
 
 /***Boton de descarga***/
 
-const botonDescarga = document.getElementById('boton-descarga');
-const section1 = document.getElementById('section1');
+ const botonDescarga = document.getElementById('boton-descarga');
+ const section1 = document.getElementById('section1');
 
-const descargarMeme = () => {
-  domtoimage.toBlob(section1).then(function (blob) {
-    saveAs(blob, 'mi-meme.png');
-  })
-}
+ const descargarMeme = () => {
+   domtoimage.toBlob(section1).then(function (blob) {
+     saveAs(blob, 'mi-meme.png');
+   })
+ }
 
-const inicializar = () => {
-  botonDescarga.addEventListener('click', descargarMeme);
-}
+ const inicializar = () => {
+   botonDescarga.addEventListener('click', descargarMeme);
+ }
 
-inicializar()
+ inicializar()
 
