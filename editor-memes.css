@@ -667,6 +667,7 @@ textarea{
   .aside,.aside2{
     width: 100%;
     padding: 30px;
+    overflow: auto;
   }
  .cerrar-panel{
   width: 30px;
