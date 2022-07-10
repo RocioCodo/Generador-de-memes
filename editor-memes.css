@@ -198,6 +198,8 @@ section {
   position: fixed;
   top: 15px;
   right: 15px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   background-color: var(--color-aside);
   border: var(--color-aside);
@@ -650,7 +652,7 @@ textarea{
   html,
   body {
     width: 100%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 
   section {
@@ -662,13 +664,15 @@ textarea{
     height: 400px;
   }
 
-  .aside,
-  .aside2 {
+  .aside,.aside2{
     width: 100%;
+    padding: 30px;
   }
-  .aside {
-    padding: 10px;
-  }
+ .cerrar-panel{
+  width: 30px;
+  height: 30px;
+ }
+
   .titulo {
     font-size: 26px;
   }
